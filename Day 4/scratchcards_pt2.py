@@ -8,10 +8,18 @@ def score(line):
 
 f = open("Day 4/input.txt", "r")
 a = f.readlines()
-total = 0
+lines = []
+multiples = []
+
 for line in a:
+    lines.append(line)
+    multiples.append(1)
+for idz, line in enumerate(lines):
     win_count = score(line)
     if win_count > 0:
-        total += 2**(win_count - 1)
+        for i in range(1, win_count+1):
+            multiples[idz+i] += multiples[idz]
+total = sum(multiples)
 print(total)
-    
+
+
